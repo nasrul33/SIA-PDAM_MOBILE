@@ -13,6 +13,7 @@ pubspec.lock
 
 # Platform (regenerated via `flutter create .`)
 android/.gradle/
+android/.kotlin/
 ios/Pods/
 ios/.symlinks/
 
