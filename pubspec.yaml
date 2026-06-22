@@ -1,0 +1,45 @@
+name: sia_pdam_field
+description: Client mobile offline-first untuk petugas baca meter SIA-PDAM.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+
+  # HTTP
+  dio: ^5.7.0
+
+  # Secure token storage (Keychain / Keystore / EncryptedSharedPreferences)
+  flutter_secure_storage: ^9.2.2
+
+  # Local offline DB
+  sqflite: ^2.3.3
+  path: ^1.9.0
+  path_provider: ^2.1.4
+
+  # Domain helpers
+  uuid: ^4.5.1
+  decimal: ^3.0.2
+
+  # Camera / foto
+  image_picker: ^1.1.2
+  http_parser: ^4.0.2
+  mime: ^1.0.6
+
+  # Konektivitas & state
+  connectivity_plus: ^6.0.5
+  provider: ^6.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
