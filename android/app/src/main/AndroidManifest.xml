@@ -1,4 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- API field SIA-PDAM + deteksi konektivitas (connectivity_plus) -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- Catatan: image_picker memakai aplikasi kamera/galeri via intent sistem,
+         sehingga TIDAK butuh izin CAMERA di manifest. Menambah CAMERA justru
+         memaksa permintaan izin runtime. -->
     <application
         android:label="sia_pdam_field"
         android:name="${applicationName}"

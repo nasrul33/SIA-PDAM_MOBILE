@@ -4,6 +4,11 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<!-- image_picker: wajib ada, jika tidak app crash saat akses kamera/galeri -->
+	<key>NSCameraUsageDescription</key>
+	<string>Aplikasi menggunakan kamera untuk memfoto meter air pelanggan.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Aplikasi mengakses galeri untuk memilih foto meter air.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
