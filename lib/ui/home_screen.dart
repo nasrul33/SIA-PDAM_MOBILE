@@ -227,6 +227,19 @@ class _AssignmentTile extends StatelessWidget {
           if (e?.syncError != null)
             Text(e!.syncError!,
                 style: const TextStyle(color: Colors.red, fontSize: 12)),
+          if (e != null && e.isAnomaly && e.anomalyReason != null)
+            Row(
+              children: [
+                const Icon(Icons.warning_amber_rounded,
+                    size: 14, color: Colors.deepOrange),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: Text(e.anomalyReason!,
+                      style: const TextStyle(
+                          color: Colors.deepOrange, fontSize: 12)),
+                ),
+              ],
+            ),
         ],
       ),
       isThreeLine: true,

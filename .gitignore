@@ -4,7 +4,7 @@
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
-pubspec.lock
+# Note: pubspec.lock IS committed (this is an app, not a package) for reproducible builds.
 
 # IDE
 .idea/

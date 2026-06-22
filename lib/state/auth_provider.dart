@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../core/api_exception.dart';
+import '../core/config.dart';
 import '../core/token_store.dart';
 import '../data/auth_repository.dart';
 import '../models/user.dart';
@@ -23,7 +24,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> bootstrap() async {
     final token = await _tokens.readToken();
-    if (token == null || await _tokens.isExpired(const Duration(hours: 12))) {
+    if (token == null || await _tokens.isExpired(ApiConfig.tokenTtl)) {
       await _tokens.clear();
       status = AuthStatus.signedOut;
     } else {
