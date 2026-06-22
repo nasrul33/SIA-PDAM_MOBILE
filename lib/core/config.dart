@@ -4,10 +4,12 @@ class ApiConfig {
 
   static const String baseUrlProd = 'https://pdamcore.web.id/api/v1/field';
 
-  /// Ganti host dev sesuai lingkungan pengujian internal.
-  static const String baseUrlDev = 'https://pdamcore.web.id/api/v1/field';
+  /// Host dev. Untuk emulator Android + `php artisan serve`, pakai
+  /// `http://10.0.2.2:8000/api/v1/field` (10.0.2.2 = alias emulator ke localhost host),
+  /// set [useProd] = false, dan aktifkan cleartext di debug manifest.
+  static const String baseUrlDev = 'http://10.0.2.2:8000/api/v1/field';
 
-  /// Set `false` untuk menunjuk ke [baseUrlDev].
+  /// Set `false` untuk menunjuk ke [baseUrlDev] (pengujian lokal).
   static const bool useProd = true;
 
   static String get baseUrl => useProd ? baseUrlProd : baseUrlDev;
