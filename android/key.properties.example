@@ -1,0 +1,12 @@
+# Template penandatanganan rilis.
+# Salin file ini menjadi `android/key.properties` (JANGAN commit — sudah di .gitignore).
+#
+# 1) Generate keystore (sekali saja, simpan baik-baik — hilang = tak bisa update app):
+#    keytool -genkey -v -keystore upload-keystore.jks -storetype JKS \
+#      -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+#
+# 2) Isi nilai di bawah lalu jalankan: flutter build appbundle --release
+storePassword=GANTI_PASSWORD_STORE
+keyPassword=GANTI_PASSWORD_KEY
+keyAlias=upload
+storeFile=C:/path/ke/upload-keystore.jks

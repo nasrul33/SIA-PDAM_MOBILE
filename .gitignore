@@ -20,3 +20,8 @@ ios/.symlinks/
 # Local config / secrets
 *.env
 .env
+
+# Release signing — JANGAN commit keystore/kredensial
+android/key.properties
+*.jks
+*.keystore
