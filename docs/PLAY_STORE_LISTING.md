@@ -33,9 +33,11 @@ memiliki akun. Bukan untuk pelanggan umum.
 ## Aset grafis yang harus disiapkan
 | Aset | Ukuran | Status |
 |---|---|---|
-| Ikon aplikasi | 512×512 PNG | turunkan dari `assets/icon/icon.png` (1024) |
-| Feature graphic | 1024×500 PNG | **perlu dibuat** |
+| Ikon aplikasi | 512×512 PNG | ✅ `docs/store/icon-512.png` |
+| Feature graphic | 1024×500 PNG | ✅ `docs/store/feature-graphic.png` |
 | Screenshot ponsel | min 2 (mis. layar Login & Tugas) | ambil dari emulator |
+
+Privacy Policy: draf di `docs/PRIVACY_POLICY.md` — isi placeholder & publikasikan ke URL publik.
 
 > Screenshot bisa diambil: `adb shell screencap -p /sdcard/s.png && adb pull /sdcard/s.png`.
 
