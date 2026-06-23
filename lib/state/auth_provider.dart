@@ -46,7 +46,7 @@ class AuthProvider extends ChangeNotifier {
     } on ApiException catch (e) {
       error = e.message;
       if (e.isUnprocessable) {
-        lockoutSeconds = _parseLockout(e.message);
+        lockoutSeconds = parseLockoutSeconds(e.message);
       }
       return false;
     } finally {
@@ -80,8 +80,15 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  int _parseLockout(String message) {
-    final m = RegExp(r'(\d+)\s*detik').firstMatch(message);
-    return m != null ? int.tryParse(m.group(1)!) ?? 0 : 0;
+  /// Ekstrak sisa detik rate-limit dari pesan server (§3.1). Toleran terhadap
+  /// variasi: "60 detik", "tunggu 60 dtk", "2 menit", "60s".
+  static int parseLockoutSeconds(String message) {
+    final m = message.toLowerCase();
+    final menit = RegExp(r'(\d+)\s*menit').firstMatch(m);
+    if (menit != null) return (int.tryParse(menit.group(1)!) ?? 0) * 60;
+    final detik =
+        RegExp(r'(\d+)\s*(?:detik|dtk|sec(?:ond)?s?|s)\b').firstMatch(m);
+    if (detik != null) return int.tryParse(detik.group(1)!) ?? 0;
+    return 0;
   }
 }
