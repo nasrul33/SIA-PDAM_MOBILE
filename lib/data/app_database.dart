@@ -62,7 +62,8 @@ class AppDatabase {
   Future<void> replaceAssignments(int periodId, List<Assignment> items) async {
     final d = await db;
     await d.transaction((txn) async {
-      await txn.delete('assignments', where: 'period_id = ?', whereArgs: [periodId]);
+      await txn
+          .delete('assignments', where: 'period_id = ?', whereArgs: [periodId]);
       final batch = txn.batch();
       for (final a in items) {
         batch.insert('assignments', a.toDb(periodId),
@@ -75,7 +76,9 @@ class AppDatabase {
   Future<List<Assignment>> assignments(int periodId) async {
     final d = await db;
     final rows = await d.query('assignments',
-        where: 'period_id = ?', whereArgs: [periodId], orderBy: 'customer_name');
+        where: 'period_id = ?',
+        whereArgs: [periodId],
+        orderBy: 'customer_name');
     return rows.map(Assignment.fromDb).toList();
   }
 
@@ -88,7 +91,8 @@ class AppDatabase {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<ReadingEntry?> entryForConnection(int connectionId, int periodId) async {
+  Future<ReadingEntry?> entryForConnection(
+      int connectionId, int periodId) async {
     final d = await db;
     final rows = await d.query('reading_entries',
         where: 'connection_id = ? AND period_id = ?',

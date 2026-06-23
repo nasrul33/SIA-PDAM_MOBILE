@@ -44,8 +44,8 @@ class SyncService {
     final pending = await _db.unsyncedEntries(periodId);
 
     for (var i = 0; i < pending.length; i += ApiConfig.batchMax) {
-      final batch = pending.sublist(
-          i, (i + ApiConfig.batchMax).clamp(0, pending.length));
+      final batch =
+          pending.sublist(i, (i + ApiConfig.batchMax).clamp(0, pending.length));
       await _syncBatch(periodId, batch, outcome);
     }
 

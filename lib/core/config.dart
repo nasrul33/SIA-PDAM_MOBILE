@@ -28,4 +28,9 @@ class ApiConfig {
 
   static const Duration connectTimeout = Duration(seconds: 20);
   static const Duration receiveTimeout = Duration(seconds: 30);
+
+  /// Retry untuk galat sementara (5xx & jaringan) dengan exponential backoff (§2).
+  /// Total percobaan = 1 + maxRetries. 4xx TIDAK di-retry.
+  static const int maxRetries = 3;
+  static const Duration retryBaseDelay = Duration(milliseconds: 400);
 }

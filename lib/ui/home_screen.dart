@@ -111,8 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ? (field.error ?? 'Sinkronisasi gagal.')
         : 'Tersimpan ${r.synced} · Galat ${r.errors} · Foto ${r.photosUploaded}'
             '${r.anomalies > 0 ? ' · ⚠ ${r.anomalies} anomali' : ''}';
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(msg)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 }
 
@@ -140,8 +139,8 @@ class _PeriodBar extends StatelessWidget {
                       value: field.selectedPeriod,
                       hint: const Text('Pilih periode terbuka'),
                       items: field.periods
-                          .map((p) => DropdownMenuItem(
-                              value: p, child: Text(p.code)))
+                          .map((p) =>
+                              DropdownMenuItem(value: p, child: Text(p.code)))
                           .toList(),
                       onChanged: (p) {
                         if (p != null) field.selectPeriod(p);
@@ -182,7 +181,8 @@ class _AssignmentList extends StatelessWidget {
       separatorBuilder: (_, __) => const Divider(height: 1),
       itemBuilder: (context, i) {
         final a = field.assignments[i];
-        return _AssignmentTile(assignment: a, entry: field.entryFor(a.connectionId));
+        return _AssignmentTile(
+            assignment: a, entry: field.entryFor(a.connectionId));
       },
     );
   }
@@ -214,8 +214,7 @@ class _AssignmentTile extends StatelessWidget {
     }
 
     return ListTile(
-      title: Text(a.customerName,
-          maxLines: 1, overflow: TextOverflow.ellipsis),
+      title: Text(a.customerName, maxLines: 1, overflow: TextOverflow.ellipsis),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -258,7 +257,7 @@ class _AssignmentTile extends StatelessWidget {
           color: color.shade100,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Text(text,
-            style: TextStyle(color: color.shade800, fontSize: 12)),
+        child:
+            Text(text, style: TextStyle(color: color.shade800, fontSize: 12)),
       );
 }

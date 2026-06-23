@@ -64,7 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Icon(Icons.water_drop, size: 64, color: Color(0xFF0277BD)),
+                    const Icon(Icons.water_drop,
+                        size: 64, color: Color(0xFF0277BD)),
                     const SizedBox(height: 12),
                     Text('SIA-PDAM Lapangan',
                         textAlign: TextAlign.center,
@@ -83,8 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         prefixIcon: Icon(Icons.person_outline),
                         border: OutlineInputBorder(),
                       ),
-                      validator: (v) =>
-                          (v == null || !v.contains('@')) ? 'Email tidak valid' : null,
+                      validator: (v) => (v == null || !v.contains('@'))
+                          ? 'Email tidak valid'
+                          : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -96,7 +98,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         prefixIcon: const Icon(Icons.lock_outline),
                         border: const OutlineInputBorder(),
                         suffixIcon: IconButton(
-                          icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_obscure
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                           onPressed: () => setState(() => _obscure = !_obscure),
                         ),
                       ),
@@ -114,7 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: Text(auth.error!,
                             style: TextStyle(
-                                color: Theme.of(context).colorScheme.onErrorContainer)),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onErrorContainer)),
                       ),
                     ],
                     const SizedBox(height: 24),

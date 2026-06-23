@@ -26,7 +26,8 @@ class AuthRepository {
 
     // SoD: hanya petugas_meter / super_admin.
     if (!user.isReader) {
-      throw ApiException(403, 'Akun ini tidak berhak mengakses aplikasi lapangan.');
+      throw ApiException(
+          403, 'Akun ini tidak berhak mengakses aplikasi lapangan.');
     }
 
     await _tokens.save(token: token, user: user);

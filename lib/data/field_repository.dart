@@ -20,7 +20,8 @@ class FieldRepository {
 
   /// GET /assignments?period_id= — unduh lalu cache ke local DB (§4.2).
   Future<List<Assignment>> fetchAndCacheAssignments(int periodId) async {
-    final body = await _api.getJson('/assignments', query: {'period_id': periodId});
+    final body =
+        await _api.getJson('/assignments', query: {'period_id': periodId});
     final items = (body['data'] as List<dynamic>? ?? const [])
         .map((e) => Assignment.fromJson(e as Map<String, dynamic>))
         .toList();

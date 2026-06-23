@@ -19,7 +19,8 @@ Future<void> main() async {
   final tokens = TokenStore();
   final db = AppDatabase.instance;
 
-  late AuthProvider authProvider; // diisi tepat di bawah; closure baca saat dipanggil.
+  late AuthProvider
+      authProvider; // diisi tepat di bawah; closure baca saat dipanggil.
   final api = ApiClient(
     tokens,
     onUnauthorized: () async => authProvider.forceSignOut(),

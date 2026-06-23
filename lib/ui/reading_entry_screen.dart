@@ -45,7 +45,8 @@ class _ReadingEntryScreenState extends State<ReadingEntryScreen> {
 
   String? _validateReading(String? v) {
     if (_estimate) return null;
-    if (v == null || v.trim().isEmpty) return 'Wajib diisi (atau pilih estimasi)';
+    if (v == null || v.trim().isEmpty)
+      return 'Wajib diisi (atau pilih estimasi)';
     final current = Decimal.tryParse(v.trim());
     if (current == null) return 'Angka tidak valid';
     if (current < Decimal.zero) return 'Tidak boleh negatif';
@@ -127,7 +128,8 @@ class _ReadingEntryScreenState extends State<ReadingEntryScreen> {
                       children: [
                         const Text('Bacaan terakhir'),
                         Text(a.lastReading,
-                            style: const TextStyle(fontWeight: FontWeight.bold)),
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ],

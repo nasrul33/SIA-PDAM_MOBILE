@@ -109,7 +109,8 @@ class FieldProvider extends ChangeNotifier {
     String? photoPath,
   }) async {
     final periodId = selectedPeriod!.id;
-    final existing = await _db.entryForConnection(assignment.connectionId, periodId);
+    final existing =
+        await _db.entryForConnection(assignment.connectionId, periodId);
 
     final entry = existing ??
         ReadingEntry(
