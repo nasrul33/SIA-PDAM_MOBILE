@@ -7,16 +7,21 @@ import '../models/reading_entry.dart';
 
 /// Local DB offline-first (sqflite). Menyimpan cache assignments & antrian bacaan.
 class AppDatabase {
-  AppDatabase._();
-  static final AppDatabase instance = AppDatabase._();
+  AppDatabase._(this._overridePath);
+  static final AppDatabase instance = AppDatabase._(null);
 
+  /// Untuk tes: pakai path eksplisit (mis. `inMemoryDatabasePath`) + ffi factory.
+  factory AppDatabase.forTesting(String path) => AppDatabase._(path);
+
+  final String? _overridePath;
   Database? _db;
 
   Future<Database> get db async => _db ??= await _open();
 
   Future<Database> _open() async {
-    final dir = await getApplicationDocumentsDirectory();
-    final path = p.join(dir.path, 'sia_pdam_field.db');
+    final path = _overridePath ??
+        p.join((await getApplicationDocumentsDirectory()).path,
+            'sia_pdam_field.db');
     return openDatabase(
       path,
       version: 1,

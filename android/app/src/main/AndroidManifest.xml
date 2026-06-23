@@ -6,7 +6,7 @@
          sehingga TIDAK butuh izin CAMERA di manifest. Menambah CAMERA justru
          memaksa permintaan izin runtime. -->
     <application
-        android:label="sia_pdam_field"
+        android:label="SIA-PDAM Lapangan"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
