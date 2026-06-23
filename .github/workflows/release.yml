@@ -1,0 +1,64 @@
+name: Release
+
+# Build artefak rilis (AAB + APK per-ABI) di cloud — berguna karena runner Linux
+# tidak terkena masalah toolchain Windows lokal.
+#
+# Penandatanganan (opsional): tambahkan repo secrets agar artefak ter-tandatangani
+# untuk Play Store. Tanpa secret, build tetap jalan (debug-signed, untuk uji):
+#   KEYSTORE_BASE64   = base64 dari upload-keystore.jks  (base64 -w0 file.jks)
+#   KEYSTORE_PASSWORD = storePassword
+#   KEY_PASSWORD      = keyPassword
+#   KEY_ALIAS         = keyAlias
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.44.2"
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Configure signing (jika secret tersedia)
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > android/app/upload-keystore.jks
+            cat > android/key.properties <<EOF
+          storePassword=$KEYSTORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=upload-keystore.jks
+          EOF
+            echo "Signing dikonfigurasi (rilis ter-tandatangani)."
+          else
+            echo "Tak ada keystore secret → debug-signed (hanya untuk uji)."
+          fi
+
+      - name: Build App Bundle (.aab)
+        run: flutter build appbundle --release
+
+      - name: Build split APKs
+        run: flutter build apk --release --split-per-abi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: |
+            build/app/outputs/bundle/release/*.aab
+            build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
